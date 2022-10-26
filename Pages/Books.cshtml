@@ -1,0 +1,76 @@
+@page "/Search/Books"
+@model BooksModel
+@section Styles {
+	<link href="~/css/my_layout/books.css" rel="stylesheet">
+}
+		
+<main id="books_container">
+        @foreach (var book in Model.Books)
+        {
+                <div class="book_item">
+                    <img src="~/images/covers/@(book.ID).jpg" alt="book cover">
+                    
+                    <div class="book_price">
+                        <div class="book_info">
+                            <div class="book">
+                                <div class="title">
+                                    <a asp-page="Book" asp-route-id="@book.ID">
+                                        @book.Title
+                                    </a>
+                                </div>
+                                
+                                <div class="author">
+                                    <span>By</span>
+                                    @foreach (var author in book.Authors)
+                                    {
+                                        
+                                        if (author != book.Authors.Last())
+                                        {
+                                            @($"{author.Name}, ")
+                                        }
+                                        else
+                                        {
+                                            @author.Name
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            
+                            <div class="publisher">
+                                <div>
+                                    <span>Published by </span>@book.Publisher
+                                </div>
+                                
+                                <div class="price">
+                                    <span>Price </span>@book.Price $
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        }
+        
+        <div id="next_page_button_container">
+            <form method="post">
+                <button class="oi oi-chevron-left"
+                    disabled="@(Model.PageNumber < 1)">
+                </button>
+                    
+                <input type="hidden" value="@(Model.PageNumber - 1)" asp-for="PageNumber">
+            </form>
+            
+            <div id="page_number">
+                @(Model.PageNumber + 1) / @(Model.TotalPages)
+            </div>
+
+            <form method="post">
+                <button class="oi oi-chevron-right"
+                    disabled="@(Model.PageNumber + 1 == Model.TotalPages)">  
+                </button>
+                    
+                <input type="hidden" value="@(Model.PageNumber + 1)" asp-for="PageNumber">
+            </form>
+        </div>
+
+</main>
+

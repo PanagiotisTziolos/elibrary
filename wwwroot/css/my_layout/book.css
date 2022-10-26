@@ -1,0 +1,280 @@
+/************ book_container ************/
+
+@media (min-width: 1081px) {
+    #book_container {
+        width: 1000px;
+    }
+}
+
+@media (min-width: 881px) and (max-width: 1080px){
+    #book_container {
+        width: 800px;
+    }
+}
+
+@media (max-width: 880px){
+    #book_container {
+        width: 90%;
+    }
+}
+
+/************  ************/
+
+/************ book ************/
+
+@media (min-width: 801px) {
+    #book_container #book {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      padding: 10px;
+    }
+}
+
+@media (max-width: 800px) {
+    #book_container #book {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+    }
+}
+
+/************  ************/
+
+/************ book img ************/
+
+@media (min-width: 801px) {
+    #book_container #book img {
+      width: 230px;
+      height: 300px;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 800px){
+    #book_container #book img {
+      width: 330px;
+      height: 450px;
+      align-self: center;
+    }
+}
+
+@media (max-width: 480px) {
+    #book_container #book img {
+      width: 231px;
+      height: 315px;
+      align-self: center;
+    }
+}
+
+
+/************  ************/
+
+/************ book info ************/
+
+@media (min-width: 1081px){
+    #book_container #book .info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 10px 40px 0px 40px;
+      min-width: 300px;
+      min-height: 200px;
+    }
+}
+
+@media (max-width: 1080px){
+    #book_container #book .info {
+      padding: 10px 0px 0px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-width: 300px;
+      min-height: 200px;
+    }
+}
+
+@media (max-width: 400px){
+    #book_container #book .info {
+      padding: 10px 0px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 10px;
+      min-width: 250px;
+      min-height: 200px;
+    }
+}
+
+/************  ************/
+
+#book_container #book .info .book_info {
+  display: flex;
+  flex-direction: column;
+}
+
+/************ book_info .title ************/
+
+@media (min-width: 1081px){
+    #book_container #book .info .book_info .title {
+      font-size: 18pt;
+    }
+}
+
+@media (max-width: 1080px){
+    #book_container #book .info .book_info .title {
+        font-size: 14pt;
+    }
+}
+
+/************  ************/
+
+/************ book_info .secondary ************/
+
+@media (min-width: 1081px) {
+    #book_container #book .info .book_info .secondary {
+      font-size: 11pt;
+      color: gray;
+      padding-top: 10px;
+    }
+}
+
+@media (max-width: 1080px){
+    #book_container #book .info .book_info .secondary {
+      font-size: 11pt;
+      color: gray;
+      padding-top: 10px;
+      font-size: 10pt;
+    }
+}
+
+/************  ************/
+
+#book_container #book .info .book_info .secondary div {
+  padding-top: 5px;
+}
+
+#book_container #book .info .price {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#book_container #book .info .price .value {
+  align-self: center;
+}
+
+#book_container #book .info .price button {
+  padding: 10px 40px;
+  border: none;
+  background-color: rgba(190, 190, 190);
+  border-radius: 3px;
+}
+
+#book_container #book .info .price button:hover {
+  background-color: lightgray;
+}
+
+#book_container #book .info .price button:active {
+  background-color: darkgray;
+}
+
+/************ description ************/
+
+@media (min-width: 461px) {
+    #book_container #description {
+      padding: 40px 40px 0px 40px;
+    }
+}
+
+@media (max-width: 460px) {
+    #book_container #description {
+      padding-top: 40px;
+    }
+}
+
+/************  ************/
+
+#book_container .title {
+  font-size: 14pt;
+}
+
+#book_container .content {
+  font-size: 11pt;
+  text-align: justify;
+  padding-top: 20px;
+}
+
+/************ reviews ************/
+
+@media (min-width: 461px) {
+    #book_container #reviews {
+      padding: 40px 40px 0px 40px;
+    }
+}
+
+@media (max-width: 460px) {
+    #book_container #reviews {
+      padding-top: 40px;
+    }
+}
+
+/************  ************/
+
+#book_container #reviews .review {
+  padding: 20px;
+  border-bottom: 1px solid gray;
+}
+
+#book_container #reviews .review .rating .oi-star {
+  color: black;
+}
+
+#book_container #reviews .review .rating .yellow_star .oi-star {
+  color: #CCCC00;
+}
+
+/************ reviews ************/
+
+@media (min-width: 461px) {
+    #book_container #reviews #review_form {
+      padding: 40px 40px 0px 40px;
+    }
+}
+
+@media (max-width: 460px) {
+    #book_container #reviews #review_form {
+      padding: 40px 40px 0px 40px;
+    }
+}
+
+/************  ************/
+
+#book_container #reviews #review_form textarea {
+  width: 100%;
+  height: 100px;
+  margin: 20px 0px;
+  #padding: 10px;
+  resize: none;
+}
+
+#book_container #reviews #review_form textarea:hover {
+  outline: 2px solid rgba(204, 229, 255);
+}
+
+#book_container #reviews #review_form textarea:focus {
+  outline: 1px solid rgba(204, 229, 255);
+}
+
+#book_container #reviews #review_form #buttons {
+  display: flex;
+  flex-direction: row;
+  width: 105px;
+}
+
+#book_container #reviews #review_form button {
+  border: none;
+  background-color: inherit;
+  color: black;
+}
+

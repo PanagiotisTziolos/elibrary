@@ -1,0 +1,100 @@
+@page "/Admin"
+@page "/Admin/Orders/Pending"
+
+@inject IOrderNotificationService OrderNotification
+@inject IStore Store
+@inject ILibrary Library
+@inject IMailman Mailman
+
+
+<style>
+  #order_page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  #order_page #title_search {
+    width: 850px;
+  }
+  
+  #order_page #contents {
+    width: 700px;
+  }
+</style>
+
+
+
+<PageTitle>Orders</PageTitle>
+
+<div id="order_page">
+  <div id="title_search"> 
+    <OrderSearchBar Title="Pending Orders" InitialList="orders" @bind-ResultList="filteredOrders" />
+  </div>
+  
+  <div id="contents">
+    <Orders FilteredOrders="filteredOrders" Methods="methods" />
+  </div>
+</div>
+
+
+
+@code {
+  private IReadOnlyList<OrderInfo> orders;  
+  
+  private List<OrderInfo> filteredOrders;
+  
+  private Dictionary<string, Func<object, Task>> methods = new();
+  
+  protected override async Task OnInitializedAsync()
+  {
+    OrderNotification.OrderHandler += OnOrderArrived;
+    
+    orders = await Store.PendingOrdersAsync();
+    
+    filteredOrders = new(orders);
+    
+    methods.Add("Ready", ReadyAsync);
+    methods.Add("Cancel", CancelAsync);
+  }
+  
+  public async Task OnOrderArrived()
+  {
+    await Reload();
+  }
+  
+  public async Task ReadyAsync(object order)
+  {
+    Store.ChangeTo((order as OrderInfo).ID, OrderState.READY);
+    
+    Mailman.Send(
+      new EmailInfo
+      {
+        Subject = "E-Library order is ready",
+        Address = (order as OrderInfo).Customer.EmailAddress,
+        Message = $"Your order with number {(order as OrderInfo).ID} is ready"
+      }
+    );
+    
+    await Reload();
+  }
+  
+  public async Task CancelAsync(object order)
+  {
+    Library.RestoreOrderItems((order as OrderInfo).Items);
+  
+    Store.ChangeTo((order as OrderInfo).ID, OrderState.CANCELLED);
+    
+    await Reload();
+  }
+  
+  private async Task Reload()
+  {
+    orders = await Store.PendingOrdersAsync();
+    
+    filteredOrders = new(orders);
+
+    await InvokeAsync(() => StateHasChanged());
+  }
+}

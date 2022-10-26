@@ -1,0 +1,89 @@
+<style>
+  #orders {
+    padding: 10px 20px 40px 20px;
+    width: 100%;
+  }
+  
+  #orders tr {
+    border-bottom: 1px solid lightgray;
+  }
+  
+  #orders td {
+    padding: 10px 10px;
+    width: 100%;
+  }
+  
+  #title_bar {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 40px;
+  }
+  
+  #order {
+    padding: 0px 20px;
+  }
+  
+  #order #copies {
+    text-align: center;
+  }
+</style>
+
+
+<table id="orders">
+    @foreach (var order in FilteredOrders)
+    {
+      <div id="title_bar">
+        <h4 id="title">Order @order.ID: @order.State</h4>
+        
+        <div>
+          @foreach (var name in Methods.Keys)
+          {
+              <button class="btn btn-link" @onclick="() => Methods[name](order)">
+                @name
+              </button>
+          }
+          <button class="btn btn-link" @onclick="() => ShowItems(order.ID)">Show more</button>
+        </div>
+      </div>
+      
+      if (showItem[order.ID])
+      {
+        <div id="order">
+          <tr>
+            <th>Books</th>
+            <th>Copies</th>
+          </tr>
+          
+          @foreach (var item in order.Items)
+          {
+            <tr>
+              <td>@(item.Book.Title)</td>
+              <td id="copies">@item.Copies</td>
+            </tr>
+          }
+        </div>
+      }
+    }
+</table>
+
+
+@code
+{
+  [Parameter]
+  public List<OrderInfo> FilteredOrders { get; set; }
+  
+  [Parameter]
+  public Dictionary<string, Func<object, Task>> Methods { get; set; } = new();
+  
+  private Dictionary<int, bool> showItem = new();
+  
+  protected override void OnParametersSet()
+  {
+    showItem = FilteredOrders.ToDictionary(fo => fo.ID, fo => false);
+  }
+  
+  public void InitializeShowItems() => 
+    showItem = FilteredOrders.ToDictionary(fo => fo.ID, fo => false);
+  
+  private void ShowItems(int i) => showItem[i] = !showItem[i];
+}

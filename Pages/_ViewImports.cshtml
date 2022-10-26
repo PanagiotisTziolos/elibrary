@@ -1,0 +1,17 @@
+﻿@using e_library
+@using Microsoft.AspNetCore.Mvc
+@using Microsoft.AspNetCore.Mvc.RazorPages
+@using Microsoft.AspNetCore.Http
+
+
+@namespace e_library.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+@using Microsoft.AspNetCore.Identity
+
+@using e_library.Model
+@using e_library.EFC_Database.Entities
+@inject UserManager<ApplicationUser> UserManager

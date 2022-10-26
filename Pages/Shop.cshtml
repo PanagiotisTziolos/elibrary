@@ -1,0 +1,151 @@
+@page
+@model ShopModel
+@section Styles {
+	<link href="~/css/my_layout/shop.css" rel="stylesheet">
+}
+
+<main id="shop">
+@if (Model.Items.Count() > 0)
+{
+    <table>
+        <tr id="titles">
+            <th>Cover</th>
+            <th class="hideTitle">Title</th>
+            <th class="hideAuthors">Authors</th>
+            <th>Price</th>
+            <th>Copies</th>
+        </tr>
+    
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>
+                    <img src="images/covers/@(item.Book.ID).jpg" width="80" height="100">
+                </td>
+                
+                <td class="hideTitle">
+                    @item.Book.Title
+                </td>
+                
+                <td class="hideAuthors">
+                    <div class="authors_container">
+                        <div>
+                            @foreach (var author in item.Book.Authors)
+                            {
+                                
+                                <div>@author.Name</div>
+                                
+                            }
+                        </div>
+                    </div>
+                </td>
+                
+                <td>
+                    <div class="price" id="price@(item.Book.ID)">
+                        @(item.Copies * item.Book.Price) $
+                    </div>
+                </td>
+                
+                <td>
+                    <div class="copies_container">
+                        <form class="remove" method="post" asp-page-handler="Remove">
+                            <input type="hidden" value="@item.Book.ID" name="id" />
+                            <button class="oi oi-circle-x"></button>
+                        </form>
+                    
+                        <div class="copies" id="copies@(item.Book.ID)">@item.Copies</div>
+                        
+                        <div class="buttons">
+                            <button class="oi oi-chevron-top" 
+                     onclick="Increase(@item.Book.ID, @item.Book.AvailableCopies, @item.Book.Price)">
+                            </button>
+                                
+                            <button class="oi oi-chevron-bottom" 
+                                onclick="Decrease(@item.Book.ID, @item.Book.Price)">
+                            </button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+
+    <form method="post" asp-page-handler="Buy">
+        @foreach (var item in Model.Items)
+        {
+            <input id="hidden@(item.Book.ID)" type="hidden" 
+                            value="1" asp-for="@Model.Copies" />
+        }
+        
+        <div id="button_price_container">
+            <div id="total_price_container">
+                Total Price: <span id="total_price"><span>
+            </div>
+            <button>Buy</button>
+        </div>
+    </form>
+}
+else
+{
+	<h3>Cart is empty</h3>
+}
+</main>
+
+
+<script>
+    var totalPriceSpan = document.getElementById("total_price");
+    var priceDivs = document.getElementsByClassName("price");
+    
+    var totalPrice = 0;
+    
+    for (var i = 0; i < priceDivs.length; i++) {
+        totalPrice += parseFloat(priceDivs[i].innerHTML);
+    }
+
+    totalPriceSpan.innerHTML = totalPrice.toFixed(2) + " $";
+
+    function Increase(id, maxCopies, price) {
+        var copiesDiv = document.getElementById("copies" + id);
+        var priceDiv = document.getElementById("price" + id);
+        var hiddenDiv = document.getElementById("hidden" + id);
+        
+        var copies = parseInt(copiesDiv.innerHTML);
+        var totalPrice = parseFloat(priceDiv.innerHTML);
+    
+        if (copies < maxCopies) {
+            copiesDiv.innerHTML = copies + 1;
+            hiddenDiv.value = copies + 1;
+            priceDiv.innerHTML = (totalPrice + price).toFixed(2) + " $";
+            
+            this.calculateTotalPrice();
+        }
+    }
+    
+        
+    function Decrease(id, price) {
+        var copiesDiv = document.getElementById("copies" + id);
+        var priceDiv = document.getElementById("price" + id);
+        var hiddenDiv = document.getElementById("hidden" + id);
+        
+        var copies = parseInt(copiesDiv.innerHTML);
+        var totalPrice = parseFloat(priceDiv.innerHTML);
+        
+        if (copies > 1) {
+            copiesDiv.innerHTML = copies - 1;
+            hiddenDiv.value = copies - 1;
+            priceDiv.innerHTML = (totalPrice - price).toFixed(2) + " $";
+            
+            this.calculateTotalPrice();
+        }
+    }
+    
+    function calculateTotalPrice() {
+        var totalPrice = 0;
+            
+        for (var i = 0; i < priceDivs.length; i++) {
+            totalPrice += parseFloat(priceDivs[i].innerHTML);
+        }
+
+        totalPriceSpan.innerHTML = totalPrice.toFixed(2) + " $";
+    }
+</script>

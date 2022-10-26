@@ -1,0 +1,28 @@
+
+@media (min-width: 1081px) {
+    #form_container #form {
+        width: 60%;
+    }
+}
+
+@media (min-width: 801px) and (max-width: 1080px) {
+    #form_container #form {
+        width: 80%;
+    }
+}
+
+@media (max-width: 800px) {
+    #form_container #form {
+        width: 100%;
+    }
+}
+
+#form_container #form #name {
+    display: flex;
+    flex-direction: row;
+}
+
+#form_container #form #name input {
+    width: 100%;
+}
+

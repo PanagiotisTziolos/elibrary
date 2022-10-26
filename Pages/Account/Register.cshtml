@@ -1,0 +1,47 @@
+@page
+@model RegisterModel
+@section Styles {
+    <link href="~/css/my_layout/account/form.css" rel="stylesheet">
+	<link href="~/css/my_layout/account/register.css" rel="stylesheet">
+	<link href="~/css/my_layout/account/button_redirection.css" rel="stylesheet">
+	<link href="~/css/my_layout/error.css" rel="stylesheet">
+}
+
+<div id="form_container">
+    <form method="post" id="form">
+        <span id="title">Create an account</span>
+        
+        <div id="name">
+            <input type="text" placeholder="First Name" 
+                asp-for="Registration.Customer.FirstName">
+                
+            <input type="text" placeholder="Second Name" 
+                asp-for="Registration.Customer.SecondName">
+        </div>
+        
+        <input type="text" placeholder="City" asp-for="Registration.Customer.City">
+        
+        <input type="text" placeholder="Zip Code" asp-for="Registration.Customer.ZipCode">
+		        
+        <input type="text" placeholder="Address" asp-for="Registration.Customer.Address">
+        
+        <input type="text" placeholder="Email" asp-for="Registration.Customer.EmailAddress">
+        
+        <input type="password" placeholder="Password" asp-for="Registration.Password">
+
+
+        <input type="password" placeholder="Confirm Password" 
+            asp-for="Registration.ConfirmPassword">
+        
+        <div id="signin_register_container">
+            <button>Register</button>
+            
+            <div id="redirection">
+                <span>Already have an account?<span>
+                <a asp-page="Login">Sign In </a>
+            </div>
+        </div>
+        
+        <div id="error" asp-validation-summary="All"></div>
+    </form>
+</div>

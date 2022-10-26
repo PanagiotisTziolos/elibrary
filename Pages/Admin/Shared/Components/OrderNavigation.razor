@@ -1,0 +1,176 @@
+@inject NavigationManager Navigation
+
+<style>
+    #top_bar {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      height: 35px;
+      background-color: rgba(57, 69, 79, 255);
+    }
+    
+    #nav_menu {
+        display: flex;
+        flex-direction: row;
+        width: 1100px;
+    }
+    
+    #left {
+      background-color: inherit;
+    }
+    
+    #left button {
+        border: none;
+        background-color: inherit;
+    }
+    
+    #drop {
+        display: flex;
+        flex-direction: column;
+        width: 100px;
+        background-color: rgba(57, 69, 79, 255);
+    }
+    
+    #drop .drop_item:hover {
+        background-color: red;
+    }
+    
+    #right {
+      width: 100%;
+    }
+    
+    #right button {
+        border: none;
+        background-color: inherit;
+    }
+    
+    #right_nav_items {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: inherit;
+    }
+    
+    .nav-link {
+        color: white;
+    }
+    
+    .nav-link:hover {
+        color: white;
+    }
+    
+    .nav-link:focus {
+        color: white;
+    }
+</style>
+
+
+
+<div id="top_bar">
+    <nav id="nav_menu">
+        <div>
+            <div id="left">
+                <button class="nav-link" @onclick="ShowOrderOptions">Orders</button> 
+                  
+                  <div id="drop">
+                      @if (showOrderOptions)
+                      {
+                          <div class="drop_item">
+                              <NavLink @onclick="Hide" class="nav-link" 
+                                href="Admin/Orders/All">
+                                           All Orders
+                              </NavLink>
+                          </div>
+                          
+                          <div class="drop_item">
+                              <NavLink @onclick="Hide" class="nav-link" 
+                                href="Admin/Orders/Pending">
+                                           Pending
+                              </NavLink>
+                          </div>
+                          
+                          <div class="drop_item">
+                              <NavLink @onclick="Hide" class="nav-link" 
+                                href="Admin/Orders/Ready">
+                                           Ready
+                              </NavLink>
+                          </div>
+                          
+                          <div class="drop_item">
+                              <NavLink @onclick="Hide" class="nav-link" 
+                                href="Admin/Orders/Delivered">
+                                           Delivered
+                              </NavLink>
+                          </div>
+                          
+                          <div class="drop_item">
+                              <NavLink @onclick="Hide" class="nav-link" 
+                                href="Admin/Orders/Cancelled">
+                                           Cancelled
+                              </NavLink>
+                          </div>
+                      }
+                  </div>
+            </div>
+        </div>
+        
+        <div id="right">
+            <div id="right_nav_items">
+                <div>
+                    <div>
+                        <button class="nav-link" @onclick="ShowBookOptions">Books</button>
+                        
+                        <div id="drop">
+                            @if (showBookOptions)
+                            {
+                                <div class="drop_item">
+                                    <NavLink @onclick="Hide" class="nav-link" 
+                                        href="Admin/Books" Match="NavLinkMatch.All">
+                                                      All Books
+                                    </NavLink>
+                                </div>
+                                
+                                <div class="drop_item">
+                                    <NavLink @onclick="Hide" class="nav-link" 
+                                        href="Admin/Books/New" Match="NavLinkMatch.All">
+                                                      New Book
+                                    </NavLink>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+              
+                <div>
+                    <div>
+                        <NavLink @onclick="Hide" class="nav-link" 
+                            href="./Account/Logout" Match="NavLinkMatch.All">
+                                          Logout
+                        </NavLink>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+
+
+@code
+{
+    private bool showOrderOptions = false;
+    
+    private bool showBookOptions = false;
+    
+    private void ShowOrderOptions() =>
+        showOrderOptions = !showOrderOptions;
+        
+    private void ShowBookOptions() =>
+        showBookOptions = !showBookOptions;
+    
+    private void Hide()
+    {
+        showOrderOptions = false;
+        showBookOptions = false;
+    }
+}

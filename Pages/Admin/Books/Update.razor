@@ -1,0 +1,173 @@
+@page "/Admin/Books/Update/{id:int}"
+
+@inject ILibrary Library
+@inject NavigationManager Navigation
+
+
+
+<style>
+  #update_page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #update_page #title {
+    padding: 30px;
+  }
+
+  #update_page #content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 800px;
+  }
+
+  #content .label_input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    width: 300px;
+  }
+  
+  #cover #error {
+    color: red;
+    font-size: 8pt;
+  }
+  
+  #content #cover {
+    align-items: end;
+  }
+  
+  #update_page #update_button {
+    padding: 20px;
+  }
+</style>
+
+<PageTitle>Update Book</PageTitle>
+
+
+
+<div id="update_page">
+  <div id="title">
+    <h1>Update Book</h1>
+  </div>
+  
+  <div id="content">
+    <div id="cover">
+      <div class="label_input">
+        <img src="@ImagePath" alt="book cover" width="300" height="400">
+        <InputFile OnChange="@LoadFiles" accept="image/png, image/jpeg" 
+          title="Upload a png or jpg image"/>
+        <span id="error">@Error</span>
+      </div>
+    </div>
+    
+    <div>
+      <div class="label_input">
+        <label>Title</label>
+        <input @bind="newBook.Title">
+      </div>
+
+      <div class="label_input">
+        <label>Price</label>
+        <input type="number"@bind="newBook.Price">
+      </div>
+
+      <div class="label_input">
+        <label>Description</label>
+        <textarea rows="4" cols="40" @bind="newBook.Description" />
+      </div>
+
+      <div class="label_input">
+        <label>Authors</label>
+        <div>
+          @for (int i = 0; i < @newBook.Authors.Count(); i++)
+          {
+            var j = i;
+            <p><input @bind="newBook.Authors[j]"></p>
+          }
+          <button class="btn btn-secondary" 
+              @onclick="() => newBook.Authors.Add(String.Empty)">+</button>
+          <button class="btn btn-secondary" 
+              @onclick="() => newBook.Authors.Remove(newBook.Authors.Last())">-</button>
+        </div>
+      </div>
+      
+      <div class="label_input">
+        <label>Available Copies</label>
+        <input type="number" @bind="newBook.AvailableCopies" min="1">
+      </div>
+
+      <div class="label_input">
+        <label>Offer</label>
+        <input type="number" @bind="newBook.Offer" min="0">
+      </div>
+    </div>
+  </div>
+  
+  <div id="update_button">
+    <button class="btn btn-secondary" @onclick="UpdateBook">Update</button>
+  </div>
+</div>
+
+
+@code
+{
+  [Parameter]
+  public int id { get; set; }
+  
+  private NewBookModel newBook = new();
+  
+  private List<TempFile> Files = new();
+  
+  private string ImagePath = String.Empty;
+  
+  private string Error = String.Empty;
+
+  protected override async Task OnInitializedAsync()
+  {
+    var book = await Library.BookAsync(id);
+      
+    newBook = NewBookModel.FromBookInfo(book);
+    
+    ImagePath = $"{Cover.ShowDirectory}{id}.jpg";
+
+    foreach (var file in Directory.EnumerateFiles(TempFile.Directory))
+      File.Delete(file);
+  }
+  
+  public void UpdateBook()
+  {
+    if (Files.Count() > 0)
+    {
+      if (File.Exists($"{Cover.Directory}{id}.jpg"))
+        File.Delete($"{Cover.Directory}{id}.jpg");
+        
+      string name = $"{id}";
+    
+      new Cover(Files.Last(), name).Save();
+    }
+    
+    Library.UpdateBook(newBook.ToBookInfo());
+
+    Navigation.NavigateTo($"/Admin/Books", true);
+  }
+  
+  public async Task LoadFiles(InputFileChangeEventArgs e)
+  {
+    Error = String.Empty;
+    ImagePath = String.Empty;
+    TempFile temp = new TempFile(new UploadedFile(e.File));
+    
+    try
+    {
+      ImagePath = await temp.ViewPath();
+      Files.Add(temp);
+    }
+    catch (Exception ex)
+    {
+      Error = ex.Message;
+    }
+  }
+}

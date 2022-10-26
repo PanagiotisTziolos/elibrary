@@ -1,0 +1,132 @@
+@page "/View/Book/{Id}"
+@model BookModel
+
+@section Styles {
+	<link href="~/css/my_layout/book.css" rel="stylesheet">
+	<link href="~/css/my_layout/error.css" rel="stylesheet">
+}
+
+
+<!-- book cover, description and price -->
+<main id="book_container">
+	        <div id="book">
+	            <img src="~/images/covers/@(Model.RequestedBook.ID).jpg" />
+	            
+	            <div class="info">
+	                <div class="book_info">
+	                    <div class="title">@Model.RequestedBook.Title</div>
+	                    
+	                    <div class="secondary">
+	                        <div>
+	                            <span>By: </span>
+	                            @foreach (var author in Model.RequestedBook.Authors)
+	                            {
+	                                <span>@author.Name</span>
+	                            }
+	                        </div>
+	                        <div>
+	                            <span>Released year: </span>@Model.RequestedBook.ReleasedYear</div>
+	                        <div>
+	                            <span>Publisher(s): </span>@Model.RequestedBook.Publisher
+	                        </div>
+	                        <div>
+	                            <span>ISBN: </span>@Model.RequestedBook.Isbn
+	                        </div>
+	                    </div>
+	                </div>
+	                
+	                <div class="price">
+	                    <form method="post" asp-page-handler="ToCart">
+				            <input type="hidden" value="@Model.RequestedBook.ID" asp-for="Id">
+				            <button>TO CART</button>
+			            </form>
+	                    <div class="value">Price: @(Model.RequestedBook.Price)$</div>
+	                </div>
+	            </div>
+	        </div>
+	        
+	        <div id="description">
+	            <div class="title">Book Description</div>
+	            <div class="content">
+	                @Model.RequestedBook.Description
+                </div>
+	        </div>
+	        
+	        <div id="reviews">
+	            <div class="title">Reviews</div>
+	            
+	            @foreach (var review in @Model.RequestedBook.Reviews)
+	            {
+	                <div class="review">
+	                    <div class="rating">
+	                        @for (int i = 0; i < @review.Rating; i++)
+	                        {
+	                            <span class="yellow_star"><span class="oi oi-star"></span></span>
+	                        }
+	                        @for (int i = @review.Rating; i < 5; i++)
+	                        {
+	                            <span class="oi oi-star"></span>
+	                        }
+	                    </div>
+	                    
+	                    <div class="content">
+	                        @review.Content
+	                    </div>
+	                </div>
+	            }
+	            
+                <div id="review_form">
+                    <form method="post" asp-page-handler="Review">
+                        <div id="buttons">
+                            <input type="hidden" value="" asp-for="Review.Rating" />
+                            
+                            @for (int i = 0; i < 5; i++)
+                            {
+                              <button class="oi oi-star"></button>
+                            }
+	                    </div>
+	                    
+                        <textarea asp-for="Review.Content" placeholder="Place a review">
+                        </textarea>
+                        
+                        <span id="error" asp-validation-for="Review.Content"></span>
+                    </form>
+                </div>
+	        </div>
+        </main>
+        
+        <script>
+            var description = document.getElementById("description");
+            var description_content = description.getElementsByClassName("content");
+        </script>
+        
+        
+        <script>
+            var buttons_container = document.getElementById("buttons");
+            var buttons = buttons_container.getElementsByTagName("button");
+            var inputs = buttons_container.getElementsByTagName("input");
+
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].addEventListener("mouseover", function() {
+                    for (var j = 0; j <= buttons.length; j++) {
+                        if (buttons[j] == this) {
+                            inputs[0].value = j + 1;
+                            
+                            for (var k = 0; k <= j; k++) {
+                                buttons[k].style.color = "#CCCC00";
+                            }
+                        }
+                    }
+                });
+                
+                buttons[i].addEventListener("mouseleave", function() {
+                    this.style.color = "black";
+                });
+            }
+            
+            buttons_container.addEventListener("mouseleave", function() {
+                for (var i = 0; i < buttons.length; i++) {
+                    buttons[i].style.color = "black";
+                }
+            });
+        </script>

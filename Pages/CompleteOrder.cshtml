@@ -1,0 +1,118 @@
+@page
+@model CompleteOrder
+@section Styles {
+	<link href="~/css/my_layout/account/form.css" rel="stylesheet">
+	<link href="~/css/my_layout/account/button_redirection.css" rel="stylesheet">
+	<link href="~/css/my_layout/complete_order.css" rel="stylesheet">
+	<link href="~/css/my_layout/error.css" rel="stylesheet">
+}
+@{
+  var background_color = Model.LoggedInUser is null ? "white" : "lightgray";
+}
+
+<span>
+  @Html.ValidationMessage("Email")
+</span>
+
+<div id="form_container">
+    <form method="post" id="form">
+        <span id="title">Delivery Information</span>
+
+        <input type="text" asp-for="Customer.FirstName" placeholder="First Name"
+						        value="@(Model.LoggedInUser?.Info.FirstName)"
+						        readonly="@(Model.LoggedInUser is not null)"/>
+        
+        
+        <input type="text" asp-for="Customer.SecondName" placeholder="Second Name"
+			              value="@(Model.LoggedInUser?.Info.SecondName)"
+			              readonly="@(Model.LoggedInUser is not null)"/>
+        
+        
+        <input type="text" asp-for="Customer.City" placeholder="City"
+			              value="@(Model.LoggedInUser?.Info.City)"
+			              readonly="@(Model.LoggedInUser is not null)"/>
+	    
+
+        <input type="text" asp-for="Customer.Address" placeholder="Address"
+			              value="@(Model.LoggedInUser?.Info.Address)"
+			              readonly="@(Model.LoggedInUser is not null)"/>
+			    
+
+        <input class="input_bar" type="text" asp-for="Customer.ZipCode" placeholder="Zip Code"
+			              value="@(Model.LoggedInUser?.Info.ZipCode)"
+			              readonly="@(Model.LoggedInUser is not null)"/>	
+        	
+
+        <input class="input_bar" type="text" asp-for="Customer.EmailAddress" placeholder="Email"
+			              value="@(Model.LoggedInUser?.Email)"
+			              readonly="@(Model.LoggedInUser is not null)" />
+        
+        <div id="signin_register_container">
+            <button>Order</button>
+            
+            <div id="redirection">
+                <select id="delivery_options" asp-for="DeliveryOption">
+                    <option value="Pay at the shop">Pay at the shop</option>
+                    <option value="Pay on delivery">Pay on delivery</option>
+                </select>
+            </div>
+        </div>
+        
+        <div id="error" asp-validation-summary="All"></div>
+    </form>
+    
+    <div id="shop_list_container">
+        <div id="shop_list">
+            <h2 id="title">
+                Shoplist
+            </h2>
+            
+            <div id="items_container">
+                <div class="items_titles_container">
+                    @foreach (var item in @Model.Items)
+                    {
+                        <div class="item_title">
+                            <div><b>@item.Copies</b> x @item.Book.Title</div>
+                        </div>
+                    }
+                </div>
+                
+                <div class="items_titles_container">
+                    @foreach (var item in @Model.Items)
+                    {
+                        <div class="item_price">
+                            <div class="book_price">@item.Book.Price $</div>
+                        </div>
+                    }
+                </div>
+            </div>
+             
+            <div id="total_price_container">
+                <div id="total_price">
+                    <b>Total</b>: <span id="total"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    var form = document.getElementById("form");
+    var inputs = form.getElementsByTagName("input");
+    
+    for (var i = 0; i < inputs.length; i++) {
+        inputs[i].style.background = "@background_color";
+    }
+    
+    var totalSpan = document.getElementById("total");
+    var prices = document.getElementsByClassName("book_price");
+    var totalPrice = 0;
+
+    for (var i = 0; i < prices.length; i++) {
+        totalPrice += parseFloat(prices[i].innerHTML);
+    }
+    totalSpan.innerHTML = totalPrice.toFixed(2) + " $";
+</script>
+

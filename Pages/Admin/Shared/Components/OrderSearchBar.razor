@@ -1,0 +1,121 @@
+<style>
+  #main {
+    display: flex;
+    flex-direction: row;
+    margin: 20px 0px;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  #main h1#title {
+     padding-top: 14px;
+  }
+  
+  #search {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  #search input {
+    width: 300px;
+    padding: 3px 10px;
+  }
+  
+  #search select {
+    border: none;
+  }
+</style>
+
+
+
+<div id="main">
+
+  <h1 id="title">@Title</h1>
+  
+  <div id="search">
+
+      <input type="search" placeholder="Search"
+         @bind="searchText" @oninput="OnTextChanged" />
+
+
+      <select class="btn btn-secondary" @onchange="OnOptionChanged">
+        @foreach (var option in options)
+        {
+          <option value="@option.ToString()">@option.ToString()</option>
+        }
+      </select>
+      
+  </div>
+</div>
+
+
+
+@code
+{
+  public enum Option { OrderID, Email }
+  
+  private List<string> options = new() { $"{Option.OrderID}", $"{Option.Email}" };
+  
+  private string option = $"{Option.OrderID}";
+  
+  private string searchText = String.Empty;
+  
+  [Parameter]
+  public string Title { get; set; }
+  
+  [Parameter]
+  public IReadOnlyList<OrderInfo> InitialList { get; set; }
+  
+  [Parameter]
+  public List<OrderInfo> ResultList { get; set; }
+    
+  [Parameter]
+  public EventCallback<List<OrderInfo>> ResultListChanged { get; set; }
+    
+  public Task OnTextChanged(ChangeEventArgs e)
+  {
+    Search($"{e.Value}");
+    
+    return ResultListChanged.InvokeAsync(ResultList);
+  }
+  
+  public Task OnOptionChanged(ChangeEventArgs e)
+  {
+    option = $"{e.Value}";
+    
+    Search(searchText);
+    
+    return ResultListChanged.InvokeAsync(ResultList);
+  }
+  
+  private void Search(string text)
+  {
+    switch (option)
+    {
+      case "OrderID":
+        SearchListForOrderID(text);
+        break;
+        
+      case "Email":
+        SearchListForOwnersEmail(text);
+        break;
+          
+      default:
+        break;
+    }
+  }
+  
+  private void SearchListForOrderID(string text)
+  {
+    if (int.TryParse(text, out int id))
+      ResultList = InitialList.Where(o => o.ID == id).ToList();
+    else
+      ResultList = InitialList.ToList();
+  }
+  
+  private void SearchListForOwnersEmail(string text)
+  { 
+    ResultList = InitialList.Where(o => o.Customer.EmailAddress.Contains(text)).ToList();
+  }
+}

@@ -1,0 +1,138 @@
+<style>
+  #main {
+    display: flex;
+    flex-direction: row;
+    margin: 20px 0px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  #main h1#title {
+     padding-top: 14px;
+  }
+  
+  #search {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  #search input {
+    width: 300px;
+    padding: 3px 10px;
+  }
+  
+  #search select {
+    border: none;
+  }
+</style>
+
+
+
+<div id="main">
+
+  <h1 id="title">@Title</h1>
+  
+  <div id="search">
+
+      <input type="search" placeholder="Search"
+         @bind="searchText" @oninput="OnTextChanged" />
+
+
+      <select class="btn btn-secondary" @onchange="OnOptionChanged">
+        @foreach (var option in options)
+        {
+          <option value="@option.ToString()">@option.ToString()</option>
+        }
+      </select>
+      
+  </div>
+</div>
+
+
+
+@code
+{
+  public enum Option { BookID, Title, Author }
+  
+  private List<string> options = new() 
+  { $"{Option.BookID}", $"{Option.Title}", $"{Option.Author}" };
+  
+  private string option = $"{Option.BookID}";
+  
+  private string searchText = String.Empty;
+  
+  [Parameter]
+  public string Title { get; set; }
+  
+  [Parameter]
+  public IReadOnlyList<BookInfo> InitialList { get; set; }
+  
+  [Parameter]
+  public List<BookInfo> ResultList { get; set; }
+    
+  [Parameter]
+  public EventCallback<List<BookInfo>> ResultListChanged { get; set; }
+    
+  public Task OnTextChanged(ChangeEventArgs e)
+  {
+    Search($"{e.Value}");
+    
+    return ResultListChanged.InvokeAsync(ResultList);
+  }
+  
+  public Task OnOptionChanged(ChangeEventArgs e)
+  {
+    option = $"{e.Value}";
+    
+    Search(searchText);
+    
+    return ResultListChanged.InvokeAsync(ResultList);
+  }
+  
+  private void Search(string text)
+  {
+    switch (option)
+    {
+      case "BookID":
+        SearchListForBookID(text);
+        break;
+        
+      case "Title":
+        SearchListForBookTitle(text);
+        break;
+        
+      case "Author":
+        SearchListForBookAuthor(text);
+        break;
+          
+      default:
+        break;
+    }
+  }
+  
+  private void SearchListForBookID(string text)
+  {
+    if (int.TryParse(text, out int id))
+      ResultList = InitialList.Where(b => b.ID == id).ToList();
+    else
+      ResultList = InitialList.ToList();
+  }
+  
+  private void SearchListForBookTitle(string text)
+  {
+    if (!string.IsNullOrWhiteSpace(text))
+      ResultList = InitialList.Where(b => b.Title.ToLower().Contains(text.ToLower())).ToList();
+    else
+      ResultList = InitialList.ToList();
+  }
+  
+  private void SearchListForBookAuthor(string text)
+  {
+    if (!string.IsNullOrWhiteSpace(text))
+      ResultList = InitialList.Where(b => 
+        b.Authors.FirstOrDefault(a => 
+          a.Name.ToLower().Contains(text.ToLower())) is not null).ToList();
+    else
+      ResultList = InitialList.ToList();
+  }
+}

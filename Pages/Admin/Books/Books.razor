@@ -1,0 +1,130 @@
+﻿@page "/Admin/Books"
+
+@inject ILibrary Library
+@inject NavigationManager Navigation
+
+
+<style>
+  #book_list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #book_list #search_title {
+    width: 850px;
+  }
+  
+  #book_table {
+    padding: 10px 20px 40px 20px;
+    width: 700px;
+  }
+  
+  #book_table #title_bar {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 40px;
+  }
+  
+  #book_table #book {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 20px;
+    text-align: center;
+  }
+  
+  #book_table #book .column {   
+    width: 100%;
+  }
+  
+  #book_table #book .table_title {
+    border-bottom: 1px solid lightgray;
+    font-weight: bold;
+    padding: 10px 10px;
+  }
+  
+  #book_table #book .table_item {
+    padding: 10px 10px;
+  }
+</style>
+
+
+
+<PageTitle>Books</PageTitle>
+
+
+<div id="book_list">
+    <div id="search_title">
+        <BookSearchBar Title="Available books" InitialList="bookList"  
+            @bind-ResultList="filteredList" />
+    </div>
+  
+    <div id="book_table">
+        @foreach (var book in filteredList)
+        {
+            <div id="title_bar">
+                <h4>Book @book.ID</h4>
+          
+                <div>
+                    <button class="btn btn-warning" @onclick="(() => Edit(book.ID))">Edit</button>
+                </div>
+            </div>
+                
+            <div id="book">
+                <div class="column">
+                    <div class="table_title">Cover</div>
+                    <div class="table_item">
+                        <img src="images/covers/@(book.ID).jpg" width="80" height="100">
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="table_title">Title</div>
+                    <div class="table_item">@book.Title</div>
+                </div>
+                      
+                <div class="column">
+                    <div class="table_title">Authors</div>
+                    <div class="table_item">
+                        @foreach (var author in book.Authors)
+                        {
+                            <div>@author.Name</div>
+                        }
+                    </div>
+                </div>
+                      
+                <div class="column">
+                    <div class="table_title">Price</div>
+                    <div class="table_item">@book.Price</div>
+                </div>
+                      
+                <div class="column">
+                    <div class="table_title">Copies</div>
+                    <div class="table_item">@book.AvailableCopies</div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+@code
+{
+  private IReadOnlyList<BookInfo> bookList;
+  
+  private List<BookInfo> filteredList;
+  
+  protected override async Task OnInitializedAsync()
+  {    
+    bookList = await Library.BooksWithTitleAsync(String.Empty);
+    
+    filteredList = new(bookList);
+  }
+  
+  private void Edit(int id)
+  {
+    Navigation.NavigateTo($"/Admin/Books/Update/{id}", true);
+  }
+}

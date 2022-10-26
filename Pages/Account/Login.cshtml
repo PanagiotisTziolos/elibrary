@@ -1,0 +1,37 @@
+@page "{handler?}"
+@model LoginModel
+@section Styles {
+    <link href="~/css/my_layout/account/form.css" rel="stylesheet">
+	<link href="~/css/my_layout/account/login.css" rel="stylesheet">
+	<link href="~/css/my_layout/account/button_redirection.css" rel="stylesheet">
+	<link href="~/css/my_layout/error.css" rel="stylesheet">
+}
+ 
+
+
+<div id="form_container">
+    <form method="post" id="form">
+        <span id="title">Sign In</span>
+
+        <input type="text" asp-for="Login.EmailAddress" placeholder="Email" >
+
+        <input type="password" asp-for="Login.Password" placeholder="Password">
+
+        <div id="remember_me">
+            <label asp-for="Login.Remember"></label>
+		    <input type="checkbox" asp-for="Login.Remember">
+        </div>
+        
+        <div id="signin_register_container">
+            <button>Sign In</button>
+            
+            <div id="redirection">
+                <span>Don't have an account?<span>
+                <a asp-page="Register">Register </a>
+            </div>
+        </div>
+        
+        <div id="error" asp-validation-summary="All"></div>
+    </form>
+</div>
+

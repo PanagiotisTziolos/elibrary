@@ -1,0 +1,15 @@
+@media (min-width: 1080px) {
+    #content {
+        width: 1000px;
+        text-align: center;
+        color: rgba(64, 64, 64);
+    }
+}
+
+@media (max-width: 1081px) {
+    #content {
+        width: 90%;
+        text-align: center;
+        color: rgba(64, 64, 64);
+    }
+}

@@ -1,0 +1,13 @@
+@media (min-width: 351px) {
+    #error {
+        color: red;
+        font-size: 11pt;
+    }
+}
+
+@media (max-width: 350px) {
+    #error {
+        color: red;
+        font-size: 10pt;
+    }
+}

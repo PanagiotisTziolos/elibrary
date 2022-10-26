@@ -1,0 +1,156 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = e_library
+build_property.RootNamespace = e_library
+build_property.ProjectDir = /media/darktemplar/Data/Projects/e_library/
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /media/darktemplar/Data/Projects/e_library
+build_property._RazorSourceGeneratorDebug = 
+
+[/media/darktemplar/Data/Projects/e_library/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/Admin/Books/Books.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRtaW4vQm9va3MvQm9va3MucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/Admin/Books/NewBook.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRtaW4vQm9va3MvTmV3Qm9vay5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/Admin/Books/Update.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRtaW4vQm9va3MvVXBkYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/Admin/Orders/AllOrders.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRtaW4vT3JkZXJzL0FsbE9yZGVycy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/Admin/Orders/CancelledOrders.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRtaW4vT3JkZXJzL0NhbmNlbGxlZE9yZGVycy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/Admin/Orders/DeliveredOrders.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRtaW4vT3JkZXJzL0RlbGl2ZXJlZE9yZGVycy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/Admin/Orders/PendingOrders.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRtaW4vT3JkZXJzL1BlbmRpbmdPcmRlcnMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/Admin/Orders/ReadyOrders.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRtaW4vT3JkZXJzL1JlYWR5T3JkZXJzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/Admin/Shared/Components/BookSearchBar.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRtaW4vU2hhcmVkL0NvbXBvbmVudHMvQm9va1NlYXJjaEJhci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/Admin/Shared/Components/OrderNavigation.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRtaW4vU2hhcmVkL0NvbXBvbmVudHMvT3JkZXJOYXZpZ2F0aW9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/Admin/Shared/Components/Orders.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRtaW4vU2hhcmVkL0NvbXBvbmVudHMvT3JkZXJzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/Admin/Shared/Components/OrderSearchBar.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRtaW4vU2hhcmVkL0NvbXBvbmVudHMvT3JkZXJTZWFyY2hCYXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/Admin/Shared/Components/RedirectToLogin.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRtaW4vU2hhcmVkL0NvbXBvbmVudHMvUmVkaXJlY3RUb0xvZ2luLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/Admin/Shared/Components/RedirectToNotFound.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRtaW4vU2hhcmVkL0NvbXBvbmVudHMvUmVkaXJlY3RUb05vdEZvdW5kLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/Admin/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRtaW4vU2hhcmVkL01haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-xzgea30ire
+
+[/media/darktemplar/Data/Projects/e_library/Pages/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWNjb3VudC9Mb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/Account/Logout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWNjb3VudC9Mb2dvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWNjb3VudC9SZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/Admin/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRtaW4vRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/Admin/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRtaW4vX0hvc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/Admin/_Layout_Razor.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRtaW4vX0xheW91dF9SYXpvci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/Book.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQm9vay5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/Books.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQm9va3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/CompleteOrder.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ29tcGxldGVPcmRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/Info/AboutUs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5mby9BYm91dFVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/Info/ContactUs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5mby9Db250YWN0VXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/NotFound.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTm90Rm91bmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/OrderCompleted.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvT3JkZXJDb21wbGV0ZWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/Shared/_Layout_top.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19MYXlvdXRfdG9wLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/Shop.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hvcC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/media/darktemplar/Data/Projects/e_library/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 

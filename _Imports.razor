@@ -1,0 +1,16 @@
+﻿@using System.Net.Http
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+@using Microsoft.JSInterop
+
+@using e_library
+@using e_library.Pages.Admin.Shared
+@using e_library.Pages.Admin.Shared.Components;
+@attribute [Authorize(Policy = "Admin")]
+
+@using e_library.Services
+@using e_library.Model

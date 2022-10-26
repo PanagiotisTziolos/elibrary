@@ -1,0 +1,47 @@
+@page "/Admin/Orders/All"
+
+@inject IStore Store
+
+<style>
+  #order_page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  #order_page #title_search {
+    width: 850px;
+  }
+  
+  #order_page #contents {
+    width: 700px;
+  }
+</style>
+
+
+<PageTitle>Orders</PageTitle>
+
+<div id="order_page">
+  <div id="title_search"> 
+    <OrderSearchBar Title="All Orders" InitialList="orders" @bind-ResultList="filteredOrders" />
+  </div>
+  
+  <div id="contents">
+    <Orders FilteredOrders="filteredOrders" />     
+  </div>
+</div>
+
+
+@code {
+  private IReadOnlyList<OrderInfo> orders;
+  
+  private List<OrderInfo> filteredOrders;
+  
+  protected override async Task OnInitializedAsync()
+  {
+    orders = await Store.AllOrdersAsync();
+    
+    filteredOrders = new(orders);
+  }
+}

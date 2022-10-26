@@ -1,0 +1,92 @@
+@{
+  var user = await UserManager.Users.Include(appUser => appUser.Info)
+                    .SingleOrDefaultAsync(appUser => appUser.Email == User.Identity.Name);
+}
+
+
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>E-Library</title>
+		<link href="~/css/my_layout/_Layout_top.css" rel="stylesheet">
+		<link href="~/css/open-iconic/font/css/open-iconic-bootstrap.min.css" rel="stylesheet">
+		@RenderSection("Styles", false)
+	</head>
+	
+	<body>
+	    <div id="page_container">
+	        <div id="top_bar">
+                <span id="logo">E-Library</span>
+                
+	            <nav id="nav_menu_top"> 
+	                <div class="container">
+                        <div class="nav_element">
+                            <a href="~/Info/ContactUs">Contact Us</a>
+                        </div>
+	                        
+                        <div class="nav_element">
+                            <a href="~/Info/AboutUs">About Us</a>
+                        </div>
+                    </div>
+	                
+	                <div class="container">
+	                    @if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="nav_element">
+                                <a href="~/Account/Logout">@user.Info.FirstName</a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="nav_element"><a href="~/Account/Login">Sign in</a></div>
+                        }
+                        
+                        <div class="nav_element">
+	                        <a asp-page="/Shop">
+                                <span id="cart" class="oi oi-cart" aria-hidden="true"></span>
+                            </a>
+	                    </div>
+                    </div>
+                </nav>
+            </div>
+            
+		    <button id="toggle_button" class="oi oi-chevron-bottom" onclick="toggle()"></button>
+            
+		    <div id="seperating_line"></div>
+		    
+		    <form id="search_bar" method="get" asp-page="/Books">
+		        <div id="search_button_container">
+                    <button id="search_button">
+                        <span class="oi oi-magnifying-glass"></span>
+                    </button>
+                    
+                    <input type="search" name="Title" placeholder="Search for a book">
+                    <input type="hidden" name="PageNumber" value="0">
+                </div>    
+            </form>
+        </div>
+
+        <!-- Main Content -->
+        <div id="main">
+		      @RenderBody()
+        </div>
+        
+        <footer>
+            <div>&copy Panagiotis Tziolos</div>
+        </footer>
+        
+        <script>
+            var nav_menu = document.getElementById("nav_menu_top");
+            
+            function toggle() {
+                if (nav_menu.style.display != "" && nav_menu.style.display != "none") {
+                    nav_menu.style.display = "none";
+                } else {
+                    nav_menu.style.display = "flex";
+                }
+            }
+        </script>
+	</body>
+</html>
